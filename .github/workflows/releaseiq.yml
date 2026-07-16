@@ -1,0 +1,23 @@
+name: ReleaseIQ
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  releaseiq:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run ReleaseIQ
+        uses: SaajidAhamed007/ReleasePilot@v1
+        with:
+          releaseiq-token: ${{ secrets.RELEASEIQ_TOKEN }}
